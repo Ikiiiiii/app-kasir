@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
 {
@@ -21,8 +22,17 @@ class ProdukController extends Controller
     }
 
     public function create(Request $req){
+        $produk = Produk::latest()->first();
+        $kode_produk = "PRD";
+        if($produk == null){
+            $no_kode = '0001';
+        }else{
+            $explode = explode("-", $produk->kode_produk);
+            $no_kode = isset($explode[1]) ? intval($explode[1]) + 1 : 1;
+            $no_kode = str_pad($no_kode, 4, '0', STR_PAD_LEFT);
+        }
+        $kode = $kode_produk."-".$no_kode;
         $req->validate([
-            'kode_produk' => 'required',
             'nama_produk' => 'required',
             'kategori_produk_id' => 'required',
             'gambar_produk' => 'required',
@@ -35,7 +45,7 @@ class ProdukController extends Controller
         $path = $file->storeAs('public/gambar_produk',$file->hashName());
 
         $produk = Produk::create([
-            'kode_produk' => $req->kode_produk,
+            'kode_produk' => $kode,
             'nama_produk' => $req->nama_produk,
             'kategori_produk_id' => $req->kategori_produk_id,
             'gambar_produk' => $path,
@@ -45,9 +55,10 @@ class ProdukController extends Controller
         ]);
 
         if($produk){
+            // Alert::success('Berhasil','Data berhasil ditambahkan');
             Session::flash('pesan','Data berhasil ditambahkan');
         }else{
-            Session::flash('pesan','Data gagal ditambahkan');
+            // Session::flash('pesan','Data gagal ditambahkan');
         }
 
         return redirect('/produk');
@@ -88,6 +99,11 @@ class ProdukController extends Controller
     
                     $produk->save();
                 }
+                if($produk){
+                    Session::flash('pesan','Data berhasil diubah');
+                }else{
+                    Session::flash('pesan','Data gagal diubah');
+                }
             }
         // }catch(\Exception $e){
         //     dd($e->getMessage());
@@ -96,7 +112,14 @@ class ProdukController extends Controller
     }
 
     public function delete(Request $req){
-        Produk::where('kode_produk',$req->kode_produk)->delete();
+        $produk = Produk::where('kode_produk',$req->kode_produk)->delete();
+
+        if($produk){
+            Session::flash('pesan','Data berhasil dihapus');
+        }else{
+            Session::flash('pesan','Data gagal dihapus');
+        }
+
         return redirect('/produk');
     }
 }

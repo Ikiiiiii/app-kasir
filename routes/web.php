@@ -46,6 +46,8 @@ Route::middleware('statuslogin')->group(function(){
     Route::get('/pelanggan', [PelangganController::class, 'index']);
     Route::get('/pelanggan/add', [PelangganController::class, 'add']);
     Route::post('/pelanggan/create', [PelangganController::class, 'create']);
+    Route::post('/pelanggan/update/{id_pelanggan}', [PelangganController::class, 'update']);
+    Route::get('/pelanggan/delete/{id_pelanggan}', [PelangganController::class, 'delete']);
 
     Route::get('/produk', [ProdukController::class, 'index']);
     Route::post('/produk/create', [ProdukController::class, 'create']);
@@ -59,6 +61,7 @@ Route::middleware('statuslogin')->group(function(){
 
     Route::get('/diskon', [DiskonController::class, 'index']);
     Route::post('/diskon/create', [DiskonController::class, 'create']);
+    Route::get('/diskon/delete/{id_diskon_produk}', [DiskonController::class, 'delete']);
 
     Route::get('/pembelian', [PembelianController::class, 'index']);
     Route::post('/pembelian/create', [PembelianController::class, 'create']);
@@ -67,6 +70,7 @@ Route::middleware('statuslogin')->group(function(){
     Route::post('/penjualan/create', [PenjualanController::class, 'create']);
     Route::get('/penjualan/delete/{id_penjualan}', [PenjualanController::class, 'delete']);
     Route::get('/penjualan/detail/{id_penjualan}', [PenjualanController::class, 'detail']);
+    Route::get('/export', [PenjualanController::class, 'export']);
 
     Route::get('/pengiriman', [PengirimanController::class, 'index']);
     Route::post('/pengiriman/create', [PengirimanController::class, 'create']);

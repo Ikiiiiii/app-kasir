@@ -85,8 +85,8 @@
                                                     <td>{{ $detailjual->id_detail_jual }}</td>
                                                     <td>{{ $detailjual->produk->nama_produk }}</td>
                                                     <td class="text-end">{{ $detailjual->jumlah_produk }}</td>
-                                                    <td class="text-end">{{ $detailjual->harga_jual }}</td>
-                                                    <td class="text-end">{{ $subtotal }}</td>
+                                                    <td class="text-end">{{ number_format($detailjual->harga_jual, '0', ',', '.') }}</td>
+                                                    <td class="text-end">{{ number_format($subtotal, '0', ',', '.') }}</td>
                                                 </tr>
                                                 {{-- <tr>
                                                     <td>2</td>
@@ -126,7 +126,7 @@
                                                         <p class="">Sub Total :</p>
                                                     </div>
                                                     <div class="col-sm-4 col-5">
-                                                        <p class="">{{ $subtotal }}</p>
+                                                        <p class="">{{ number_format($subtotal, '0', ',', '.') }}</p>
                                                     </div>
                                                     <div class="col-sm-8 col-7">
                                                         <p class=" discount-rate">Shipping :</p>

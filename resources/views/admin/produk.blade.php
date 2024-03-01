@@ -2,19 +2,22 @@
 
 @section('content')
 <h1>Data Produk</h1>
-<p class="text-secondary">
+{{-- <p class="text-secondary">
     @if (Session::get('pesan'))
         {{ Session::get('pesan') }}
     @endif
-</p>
+</p> --}}
 <div class="row layout-spacing">
     <div class="col-lg-12">
         <div class="d-grid gap-2 d-md-flex justify-content-end">
             {{-- <a href="/kategori/add" class="btn btn-sm btn-primary mb-2">Tambah</a> --}}
             <!-- Button trigger modal -->
+
+            @if(Auth::user()->level_akses == 'admin')
             <button type="button" class="btn btn-sm mb-2 btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Tambah
             </button>
+            @endif
             
             <!-- Modal -->
             <div class="modal animated fadeInDown" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -28,17 +31,11 @@
                     <form action="/produk/create" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label class="" for="">Kode Produk</label>
-                                <input class="form-control" type="text" name="kode_produk" id="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 mt-2">
+                            <div class="col-sm-6">
                                 <label for="" class="">Nama Produk</label>
                                 <input type="text" name="nama_produk" class="form-control">
                             </div>
-                            <div class="col-sm-6 mt-2">
+                            <div class="col-sm-6">
                                 <label for="" class="">Kategori</label>
                                 <select class="form-select" name="kategori_produk_id" id="">
                                     <option selected>Pilih Kategori -</option>
@@ -130,12 +127,12 @@
                                 <span class="shadow-none badge badge-primary rounded-pill">{{ $item->stok }}</span>
                             </td>
                             <td>{{Carbon\Carbon::parse($item->tanggal_kadaluarsa)->format('d-m-Y')}}</td>
-                            <td class="">
+                            <td class="text-center">
                                 <ul class="table-controls">
                                     <li><a href="" class="bs-tooltip text-center" data-bs-toggle="modal" data-bs-target="#edit{{ $item->kode_produk }}" data-bs-placement="top" title="Edit" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-8 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
                                     <div class="modal animated fadeInDown" id="edit{{ $item->kode_produk }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                        <div class="modal-content">
+                                        <div class="modal-content text-start">
                                             <div class="modal-header">
                                             <h1 class="modal-title fs-5 " id="staticBackdropLabel">Edit Data Produk</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -250,7 +247,9 @@
                                         </div>
                                         </div>
                                     </div>
-                                    <li><a href="/produk/delete/{{ $item->kode_produk }}" class="bs-tooltip text-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                    @if(Auth::user()->level_akses == 'admin')
+                                    <li><a href="#" class="bs-tooltip text-center delete" data-id="{{ $item->kode_produk }}" data-nama="{{ $item->nama_produk }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                    @endif
                                 </ul>
                             </td>   
                         </tr>

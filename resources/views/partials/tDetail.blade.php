@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Sales Admin | EQUATION - Multipurpose Bootstrap Dashboard Template </title>
+    <title>Struk Produk | Kaidoo Store </title>
     <link rel="icon" type="image/x-icon" href="https://designreset.com/equation/html/src/assets/img/favicon.ico"/>
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -334,13 +334,13 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="invoice" data-bs-parent="#accordionExample">
                             <li>
-                                <a href="/produk"> Data Produk </a>
-                            </li>
-                            <li>
                                 <a href="/kategori"> Data Kategori </a>
                             </li>
                             <li>
                                 <a href="/diskon"> Data Diskon </a>
+                            </li>
+                            <li>
+                                <a href="/produk"> Data Produk </a>
                             </li>
                         </ul>
                     </li>
@@ -375,14 +375,6 @@
                         </a>
                     </li>
 
-                    <li class="menu">
-                        <a href="/pengiriman" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><path d="M1 3 H16 V16 H1 V3 z"/><path d="M16 8 L20 8 L23 11 L23 16 L16 16 L16 8 Z"/><path d="M8 18.5 A2.5 2.5 0 0 1 5.5 21 A2.5 2.5 0 0 1 3 18.5 A2.5 2.5 0 0 1 8 18.5 z"/><path d="M21 18.5 A2.5 2.5 0 0 1 18.5 21 A2.5 2.5 0 0 1 16 18.5 A2.5 2.5 0 0 1 21 18.5 z"/></svg>
-                                <span>Pengiriman</span>
-                            </div>
-                        </a>
-                    </li>
                     {{-- <li class="menu">
                         <a href="app-mailbox.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">

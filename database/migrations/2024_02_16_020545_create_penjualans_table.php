@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id('id_penjualan');
-            $table->string('kode_transaksi',8);
+            $table->string('kode_transaksi',9);
             $table->dateTime('tanggal_jual')->default(now());
             $table->enum('metode_pembayaran', ['Transfer','COD']);
             $table->unsignedBigInteger('pelanggan_id');

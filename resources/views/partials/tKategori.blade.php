@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Sales Admin | EQUATION - Multipurpose Bootstrap Dashboard Template </title>
+    <title>Data Kategori | Kaidoo Store </title>
     <link rel="icon" type="image/x-icon" href="https://designreset.com/equation/html/src/assets/img/favicon.ico"/>
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -22,6 +22,8 @@
     <link href="{{ asset('/src/plugins/src/animate/animate.css') }}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/src/table/datatable/datatables.css') }}">
 
@@ -31,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/css/dark/table/datatable/dt-global_style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/css/dark/table/datatable/custom_dt_custom.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('/src/plugins/src/sweetalerts2/sweetalerts2.css') }}">
+
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/structure-mod.html') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/structure-mod.html') }}" rel="stylesheet" type="text/css" />
 
@@ -38,11 +42,14 @@
     <link href="{{ asset('/src/assets/css/light/components/carousel.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/src/assets/css/light/components/modal.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/src/assets/css/light/components/tabs.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/src/plugins/css/light/sweetalerts2/custom-sweetalert.css') }}" rel="stylesheet" type="text/css" />
+
     
     <link href="{{ asset('/src/assets/css/dark/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/src/assets/css/dark/components/carousel.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/src/assets/css/dark/components/modal.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/src/assets/css/dark/components/tabs.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/src/plugins/css/dark/sweetalerts2/custom-sweetalert.css') }}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('/src/plugins/src/filepond/filepond.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/src/plugins/src/filepond/FilePondPluginImagePreview.min.css') }}">    
@@ -54,6 +61,7 @@
 
 </head>
 <body class="">
+    @include('sweetalert::alert')
     <!-- BEGIN LOADER -->
     <div id="load_screen"> <div class="loader"> <div class="loader-content">
         <div class="spinner-grow align-self-center"></div>
@@ -360,14 +368,14 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="invoice" data-bs-parent="#accordionExample">
-                            <li>
-                                <a href="/produk"> Data Produk </a>
-                            </li>
                             <li class="active">
                                 <a href="/kategori"> Data Kategori </a>
                             </li>
                             <li>
                                 <a href="/diskon"> Data Diskon </a>
+                            </li>
+                            <li>
+                                <a href="/produk"> Data Produk </a>
                             </li>
                         </ul>
                     </li>
@@ -402,14 +410,6 @@
                         </a>
                     </li>
 
-                    <li class="menu">
-                        <a href="/pengiriman" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><path d="M1 3 H16 V16 H1 V3 z"/><path d="M16 8 L20 8 L23 11 L23 16 L16 16 L16 8 Z"/><path d="M8 18.5 A2.5 2.5 0 0 1 5.5 21 A2.5 2.5 0 0 1 3 18.5 A2.5 2.5 0 0 1 8 18.5 z"/><path d="M21 18.5 A2.5 2.5 0 0 1 18.5 21 A2.5 2.5 0 0 1 16 18.5 A2.5 2.5 0 0 1 21 18.5 z"/></svg>
-                                <span>Pengiriman</span>
-                            </div>
-                        </a>
-                    </li>
                     {{-- <li class="menu">
                         <a href="app-mailbox.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -1058,6 +1058,12 @@
     <!--  BEGIN CUSTOM SCRIPT FILE  -->
     <script src="{{ asset('/src/assets/js/scrollspyNav.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{{ asset('/src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/sweetalerts2/custom-sweetalert.js') }}"></script>
+
     <script src="{{ asset('/src/plugins/src/filepond/filepond.min.js') }}"></script>
     <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginFileValidateType.min.js') }}"></script>
     <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImageExifOrientation.min.js') }}"></script>
@@ -1224,6 +1230,45 @@
     <!-- END PAGE LEVEL SCRIPTS -->
 
 </body>
+
+<script>
+
+    $('.delete').click( function() {
+        var kategoriid = $(this).attr('data-id');
+        var kategori = $(this).attr('data-nama');
+        Swal.fire({
+            title: "Yakin menghapus data?",
+            text: "Anda akan menghapus kategori "+kategori+" ",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, hapus!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = "/kategori/delete/"+kategoriid+""
+                Swal.fire({
+                title: "Dihapus!",
+                text: "Kategori berhasil dihapus.",
+                icon: "success"
+                });
+            }else{
+                Swal.fire({
+                    title: "Dibatalkan!",
+                    text: "Kategori terselamatkan.",
+                    icon: "success"
+                })
+            }
+        });
+    });
+
+</script>
+
+<script>
+    @if(Session::has('pesan'))
+    toastr.success("{{ Session::get('pesan') }}");
+    @endif
+</script>
 
 <!-- Mirrored from designreset.com/equation/html/semi-dark-menu/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Feb 2024 03:03:37 GMT -->
 </html>

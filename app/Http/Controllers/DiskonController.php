@@ -7,6 +7,7 @@ use App\Models\Diskon;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DiskonController extends Controller
 {
@@ -43,26 +44,15 @@ class DiskonController extends Controller
         return redirect('/diskon');
     }
 
-    // public function add(Request $req){
-    //     $timezone = 'Asia/Jakarta';
-    //     $date = new DateTime('now', new DateTimeZone($timezone));
+    public function delete(Request $req){
+        $diskon = Diskon::where('id_diskon_produk',$req->id_diskon_produk)->delete();
+        
+        if($diskon){
+            Session::flash('pesan','Data berhasil dihapus');
+        }else{
+            Session::flash('pesan','Data gagal dihapus');
+        }
 
-    //     $tanggal = $date->format('Y-m-d');
-    //     $localtime = $date->format('H:i:s');
-
-    //     try{
-    //         $data = $request->validate([
-    //             'waktu_masuk' => $localtime,
-    //             'token_masuk' => 'required',
-    //             'token_keluar' => 'required',
-    //             'tanggal' => 'required',
-    //             'keterangan' => 'required',
-    //             'nis' => 'required'
-    //         ]);
-    //         Presensi::create($data);
-    //     }catch (\Exception $e){
-    //         dd($e->getMessage());
-    //     }
-    //     return redirect('presensi')
-    //     }
+        return redirect('/diskon');
+    }
 }

@@ -24,15 +24,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($users as $item)
+                @foreach ($users as $key => $item)
+                    @if($item->level_akses != 'admin')
                     <tr>
-                        <td class="checkbox-column text-center">{{ $loop->iteration }}</td>
+                        <td class="checkbox-column text-center">{{ $key+1 }}</td>
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->email }}</td>
                         <td class="text-center">
                             <span class="shadow-none badge 
-                            @if($item->level_akses == 'admin') badge-primary
-                            @elseif($item->level_akses == 'petugas') badge-success
+                            @if($item->level_akses == 'petugas') badge-success
                             @elseif($item->level_akses == 'pelanggan') badge-warning
                             @endif">{{ $item->level_akses }}</span>
                         </td>
@@ -43,6 +43,7 @@
                             </ul>
                         </td>   
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>

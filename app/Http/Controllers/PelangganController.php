@@ -54,4 +54,29 @@ class PelangganController extends Controller
             }
         }
     }
+
+    public function update(Request $req){
+        $validate = $req->validate([
+            'nama_pelanggan' => 'required',
+            'alamat' => 'required',
+            'no_telepon' => 'required'
+        ]);
+        $pelanggan = Pelanggan::where('id_pelanggan',$req->id_pelanggan)->update($validate);
+        if($pelanggan){
+            Session::flash('pesan','Data berhasil diedit');
+        }else{
+            Session::flash('pesan','Data gagal diedit');
+        }
+        return redirect('/pelanggan');
+    }
+
+    public function delete(Request $req){
+        $pelanggan = Pelanggan::where('id_pelanggan',$req->id_pelanggan)->delete();
+        if($pelanggan){
+            Session::flash('pesan','Data berhasil dihapus');
+        }else{
+            Session::flash('pesan','Data gagal dihapus');
+        }
+        return redirect('/pelanggan');
+    }
 }

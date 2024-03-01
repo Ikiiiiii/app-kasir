@@ -2,11 +2,11 @@
 
 @section('content')
     <h1>Data Diskon</h1>
-    <p class="text-secondary">
+    {{-- <p class="text-secondary">
         @if(Session::get('pesan'))
             {{ Session::get('pesan') }}
         @endif
-    </p>
+    </p> --}}
     <div class="row layout-spacing">
         <div class="col-lg-12">
             <div class="d-grid gap-2 d-md-flex justify-content-end">
@@ -20,7 +20,7 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-white" id="staticBackdropLabel">Tambah Data Produk</h1>
+                        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Tambah Data Produk</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -28,13 +28,13 @@
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label class="text-white" for="">Nama Diskon</label>
+                                    <label class="" for="">Nama Diskon</label>
                                     <input class="form-control" type="text" name="nama_diskon" id="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 mt-2">
-                                    <label for="" class="text-white">Jenis Diskon</label>
+                                    <label for="" class="">Jenis Diskon</label>
                                     <select class="form-select" name="jenis_diskon" id="">
                                         <option selected>Pilih Jenis -</option>
                                         <option value="Persentase">Persentase</option>
@@ -42,23 +42,23 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6 mt-2">
-                                    <label for="" class="text-white">Nilai Diskon</label>
+                                    <label for="" class="">Nilai Diskon</label>
                                     <input type="text" name="nilai_diskon" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 mt-2">
-                                    <label for="" class="text-white">Deskripsi</label>
+                                    <label for="" class="">Deskripsi</label>
                                     <textarea name="deskripsi" class="form-control" id="" cols="30" rows="5"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 mt-2">
-                                    <label for="" class="text-white">Mulai Berlaku</label>
+                                    <label for="" class="">Mulai Berlaku</label>
                                     <input type="date" name="berlaku_mulai" class="form-control">
                                 </div>
                                 <div class="col-sm-6 mt-2">
-                                    <label for="" class="text-white">Akhir Berlaku</label>
+                                    <label for="" class="">Akhir Berlaku</label>
                                     <input type="date" name="berlaku_selesai" class="form-control">
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                             <div class="modal-dialog">
                                             <div class="modal-content text-start">
                                                 <div class="modal-header">
-                                                <h1 class="modal-title fs-5 text-white" id="staticBackdropLabel">Tambah Data Produk</h1>
+                                                <h1 class="modal-title fs-5 " id="staticBackdropLabel">Tambah Data Produk</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -116,13 +116,13 @@
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-sm-12">
-                                                            <label class="text-white" for="">Nama Diskon</label>
+                                                            <label class="" for="">Nama Diskon</label>
                                                             <input class="form-control" type="text" name="nama_diskon" value="{{ $item->nama_diskon }}" id="">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-sm-6 mt-2">
-                                                            <label for="" class="text-white">Jenis Diskon</label>
+                                                            <label for="" class="">Jenis Diskon</label>
                                                             <select class="form-select" name="jenis_diskon" id="">
                                                                 <option selected>Pilih Jenis -</option>
                                                                 @foreach ($jenis as $type)
@@ -131,23 +131,23 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-6 mt-2">
-                                                            <label for="" class="text-white">Nilai Diskon</label>
+                                                            <label for="" class="">Nilai Diskon</label>
                                                             <input type="text" name="nilai_diskon" value="{{ $item->nilai_diskon }}" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-sm-12 mt-2">
-                                                            <label for="" class="text-white">Deskripsi</label>
+                                                            <label for="" class="">Deskripsi</label>
                                                             <textarea name="deskripsi" class="form-control" id="" cols="30" rows="5">{{ $item->deskripsi }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-sm-6 mt-2">
-                                                            <label for="" class="text-white">Mulai Berlaku</label>
+                                                            <label for="" class="">Mulai Berlaku</label>
                                                             <input type="date" name="berlaku_mulai" value="{{ $item->berlaku_mulai }}" class="form-control">
                                                         </div>
                                                         <div class="col-sm-6 mt-2">
-                                                            <label for="" class="text-white">Akhir Berlaku</label>
+                                                            <label for="" class="">Akhir Berlaku</label>
                                                             <input type="date" name="berlaku_selesai" value="{{ $item->berlaku_selesai }}" class="form-control">
                                                         </div>
                                                     </div>
@@ -160,7 +160,7 @@
                                             </div>
                                             </div>
                                         </div>
-                                        <li><a href="/pelanggan/delete/" class="bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                        <li><a href="#" class="bs-tooltip delete" data-id="{{ $item->id_diskon_produk }}" data-nama="{{ $item->nama_diskon }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
                                     </ul>
                                 </td>
                             </tr> 

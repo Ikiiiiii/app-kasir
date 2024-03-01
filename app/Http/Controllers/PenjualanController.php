@@ -9,6 +9,7 @@ use App\Models\Pelanggan;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -17,8 +18,31 @@ class PenjualanController extends Controller
     public function index(){
         $data['produk'] = Produk::all();
         $data['pelanggan'] = Pelanggan::all();
-        $data['detail'] = DetailJual::all();
         $data['penjualan'] = Penjualan::all();
+        $groupedDetails = DetailJual::with('produk', 'penjualan.pelanggan')
+        ->get()
+        ->groupBy('penjualan.kode_transaksi');
+    
+        $data['groupedDetails'] = $groupedDetails;
+
+        // Menyiapkan array untuk menyimpan subtotal setiap grup transaksi
+        $subtotals = [];
+
+        // Iterasi melalui setiap grup transaksi
+        foreach ($groupedDetails as $kodeTransaksi => $details) {
+            $subtotal = 0;
+
+            // Iterasi melalui setiap detail transaksi pada grup
+            foreach ($details as $detail) {
+                $subtotal += $detail->jumlah_produk * $detail->produk->harga;
+            }
+
+            // Menyimpan subtotal ke dalam array
+            $subtotals[$kodeTransaksi] = $subtotal;
+        }
+
+        // Menambahkan data subtotal ke dalam array data
+        $data['subtotals'] = $subtotals;
         
         return view('admin.penjualan',$data);
     }
@@ -44,37 +68,81 @@ class PenjualanController extends Controller
     }
 
     public function create(Request $req){
-        $req->validate([
-            'kode_transaksi' => 'required',
-            'produk_kode' => 'required',
-            'harga_jual' => 'required',
-            'jumlah_produk' => 'required',
-            'metode_pembayaran' => 'required',
-            'pelanggan_id' => 'required'
+    $penjualan = Penjualan::latest()->first();
+    $kode_transaksi = "TRN";
+
+    if ($penjualan == null) {
+        $no_kode = '0001';
+    } else {
+        $no_kode = isset($penjualan->id_penjualan) ? $penjualan->id_penjualan + 1 : 1;
+        $no_kode = str_pad($no_kode, 4, '0', STR_PAD_LEFT);
+    }
+
+    $kode = $kode_transaksi . "-" . $no_kode;
+
+    $req->validate([
+        'tanggal_jual' => 'required',
+        'metode_pembayaran' => 'required',
+        'pelanggan_id' => 'required',
+        'produk' => 'required|array|min:1',
+        'produk.*.produk_kode' => 'required',
+        'produk.*.jumlah_produk' => 'required|numeric|min:1',
+    ]);
+
+    $penjualan = Penjualan::create([
+        'kode_transaksi' => $kode,
+        'tanggal_jual' => $req->tanggal_jual,
+        'metode_pembayaran' => $req->metode_pembayaran,
+        'pelanggan_id' => $req->pelanggan_id,
+    ]);
+
+    if (!$penjualan) {
+        Session::flash('pesan', 'Gagal membuat data penjualan');
+        return redirect()->back();
+    }
+
+    foreach ($req->produk as $produk) {
+        $product = Produk::where('kode_produk', $produk['produk_kode'])->first();
+
+        if ($produk['jumlah_produk'] > $product->stok) {
+            Session::flash('pesan', 'Stok produk ' . $product->nama_produk . ' tidak mencukupi');
+            return redirect()->back();
+        }
+
+        $detail = DetailJual::create([
+            'produk_kode' => $produk['produk_kode'],
+            'harga_jual' => $product->harga,
+            'jumlah_produk' => $produk['jumlah_produk'],
+            'penjualan_id' => $penjualan->id_penjualan,
         ]);
 
-        $penjualan = Penjualan::create([
-            'kode_transaksi' => $req->kode_transaksi,
-            'metode_pembayaran' => $req->metode_pembayaran,
-            'pelanggan_id' => $req->pelanggan_id
-        ]);
-
-        if($penjualan){
-            $detail = DetailJual::create([
-                'produk_kode' => $req->produk_kode,
-                'harga_jual' => $req->harga_jual,
-                'jumlah_produk' => $req->jumlah_produk,
-                'penjualan_id' => $penjualan->id_penjualan,
-            ]);
-            if($detail){
-                Session::flash('pesan','Data berhasil ditambahkan');
-                return redirect('/penjualan');
-            }else{
-                Session::flash('pesan','Data gagal ditambahkan');
-                return redirect()->back();
-            }
+        if (!$detail) {
+            Session::flash('pesan', 'Gagal menambahkan detail penjualan');
         }
     }
+
+    Session::flash('pesan', 'Data berhasil ditambahkan');
+    return redirect('/penjualan');
+}
+
+    public function export()
+    {
+        $data['produk'] = Produk::all();
+        $data['pelanggan'] = Pelanggan::all();
+        $data['penjualan'] = Penjualan::all();
+        $groupedDetails = DetailJual::with('produk', 'penjualan.pelanggan')
+            ->get()
+            ->groupBy('penjualan.kode_transaksi');
+        
+        $data['groupedDetails'] = $groupedDetails;
+
+        // Membuat PDF
+        $pdf = PDF::loadView('admin.penjualan-pdf', $data);
+
+        // Mengunduh PDF atau menampilkan di browser
+        return $pdf->download('penjualan.pdf');
+    }
+
 
     public function delete(Request $req){
         DetailJual::where('penjualan_id',$req->id_penjualan)->delete();

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Sales Admin | EQUATION - Multipurpose Bootstrap Dashboard Template </title>
+    <title>Data Penjualan | Kaidoo Store </title>
     <link rel="icon" type="image/x-icon" href="https://designreset.com/equation/html/src/assets/img/favicon.ico"/>
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -17,6 +17,12 @@
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/plugins.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{ asset('/src/plugins/src/animate/animate.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/src/table/datatable/datatables.css') }}">
@@ -29,6 +35,23 @@
 
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/structure-mod.html') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/structure-mod.html') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('/src/assets/css/light/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/src/assets/css/light/components/carousel.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/src/assets/css/light/components/modal.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/src/assets/css/light/components/tabs.css') }}" rel="stylesheet" type="text/css">
+    
+    <link href="{{ asset('/src/assets/css/dark/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/src/assets/css/dark/components/carousel.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/src/assets/css/dark/components/modal.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/src/assets/css/dark/components/tabs.css') }}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{ asset('/src/plugins/src/filepond/filepond.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/src/plugins/src/filepond/FilePondPluginImagePreview.min.css') }}">    
+    <link href="{{ asset('/src/plugins/css/light/filepond/custom-filepond.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/src/plugins/css/dark/filepond/custom-filepond.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body class="">
@@ -339,13 +362,13 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="invoice" data-bs-parent="#accordionExample">
                             <li>
-                                <a href="/produk"> Data Produk </a>
-                            </li>
-                            <li>
                                 <a href="/kategori"> Data Kategori </a>
                             </li>
                             <li>
                                 <a href="/diskon"> Data Diskon </a>
+                            </li>
+                            <li>
+                                <a href="/produk"> Data Produk </a>
                             </li>
                         </ul>
                     </li>
@@ -380,14 +403,6 @@
                         </a>
                     </li>
 
-                    <li class="menu">
-                        <a href="/pengiriman" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><path d="M1 3 H16 V16 H1 V3 z"/><path d="M16 8 L20 8 L23 11 L23 16 L16 16 L16 8 Z"/><path d="M8 18.5 A2.5 2.5 0 0 1 5.5 21 A2.5 2.5 0 0 1 3 18.5 A2.5 2.5 0 0 1 8 18.5 z"/><path d="M21 18.5 A2.5 2.5 0 0 1 18.5 21 A2.5 2.5 0 0 1 16 18.5 A2.5 2.5 0 0 1 21 18.5 z"/></svg>
-                                <span>Pengiriman</span>
-                            </div>
-                        </a>
-                    </li>
                     {{-- <li class="menu">
                         <a href="app-mailbox.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -1028,7 +1043,98 @@
     
     
     <script src="{{ asset('/src/assets/js/custom.js') }}"></script>
+
+    <script src="{{ asset('/src/plugins/src/highlight/highlight.pack.js') }}"></script>
+
     <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!--  BEGIN CUSTOM SCRIPT FILE  -->
+    <script src="{{ asset('/src/assets/js/scrollspyNav.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{{ asset('/src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/sweetalerts2/custom-sweetalert.js') }}"></script>
+
+    <script src="{{ asset('/src/plugins/src/filepond/filepond.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginFileValidateType.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImageExifOrientation.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImagePreview.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImageCrop.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImageResize.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/FilePondPluginImageTransform.min.js') }}"></script>
+    <script src="{{ asset('/src/plugins/src/filepond/filepondPluginFileValidateSize.min.js') }}"></script>
+    
+    <script>
+
+        function addVideoInModal(btnSelector, videoSource, modalSelector, iframeHeight, iframeWidth, iframeContainer) {
+            var myModal = new bootstrap.Modal(document.getElementById(modalSelector), {
+                keyboard: false
+            })            
+            document.querySelector(btnSelector).addEventListener('click', function() {
+                var src = videoSource;
+                myModal.show('show');
+                var ifrm = document.createElement("iframe");
+                ifrm.setAttribute("src", src);
+                ifrm.setAttribute('width', iframeWidth);
+                ifrm.setAttribute('height', iframeHeight);
+                ifrm.style.border = "0";
+                ifrm.setAttribute("allow", "encrypted-media");
+                document.querySelector(iframeContainer).appendChild(ifrm);
+            })
+        }
+        
+        addVideoInModal('#yt-video-link', 'https://www.youtube.com/embed/YE7VzlLtp-4', 'videoMedia1', '315', '560', '.yt-container')
+        
+        addVideoInModal('#vimeo-video-link', 'https://player.vimeo.com/video/1084537', 'videoMedia2', '315', '560', '.vimeo-container')
+
+
+
+
+        /**
+         * ==================
+         * Single File Upload
+         * ==================
+        */
+
+        // We register the plugins required to do 
+        // image previews, cropping, resizing, etc.
+        FilePond.registerPlugin(
+        FilePondPluginFileValidateType,
+        FilePondPluginImageExifOrientation,
+        FilePondPluginImagePreview,
+        FilePondPluginImageCrop,
+        FilePondPluginImageResize,
+        FilePondPluginImageTransform,
+        //   FilePondPluginImageEdit
+        );
+
+        // Select the file input and use 
+        // create() to turn it into a pond
+        var modalImage = FilePond.create(
+        document.querySelector('.filepond'),
+        {
+            // labelIdle: `<span class="no-image-placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span> <p class="drag-para">Drag & Drop your picture or <span class="filepond--label-action" tabindex="0">Browse</span></p>`,
+            imagePreviewHeight: 170,
+            imageCropAspectRatio: '1:1',
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            stylePanelLayout: 'compact circle',
+            styleLoadIndicatorPosition: 'center bottom',
+            styleProgressIndicatorPosition: 'right bottom',
+            styleButtonRemoveItemPosition: 'left bottom',
+            styleButtonProcessItemPosition: 'right bottom',
+        }
+        );
+
+        const myModalEl = document.getElementById('profileModal')
+        myModalEl.addEventListener('shown.bs.modal', event => {
+            modalImage.addFiles('../src/assets/img/drag-1.jpg');
+        })
+
+    </script>    
+    <!--  END CUSTOM SCRIPT FILE  -->
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ asset('/src/plugins/src/table/datatable/datatables.js') }}"></script>
@@ -1114,7 +1220,7 @@
 
         multiCheck(c3);
     </script>
-    <!-- END PAGE LEVEL SCRIPTS -->  
+    <!-- END PAGE LEVEL SCRIPTS -->
 
 </body>
 

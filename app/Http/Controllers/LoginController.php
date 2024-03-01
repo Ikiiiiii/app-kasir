@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -16,11 +18,11 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt(['email'=>$req->akun,'password'=>$req->password])){
-            return redirect('dashboard');
+            return redirect('dashboard')->with('pesan','Login Berhasil!');
         }elseif(Auth::attempt(['username'=>$req->akun,'password'=>$req->password])){
-            return redirect('dashboard');
+            return redirect('dashboard')->with('pesan','Login Berhasil!');
         }
-        return redirect()->back();
+        return redirect()->back()->with('errors','Login Gagal');
 
     }
 

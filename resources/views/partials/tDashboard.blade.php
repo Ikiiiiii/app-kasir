@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Sales Admin | EQUATION - Multipurpose Bootstrap Dashboard Template </title>
+    @if (Auth::user()->level_akses == 'petugas')
+    <title>Dashboard Petugas | Kaidoo Store </title>
+    @else
+    <title>Dashboard Admin | Kaidoo Store </title>
+    @endif
     <link rel="icon" type="image/x-icon" href="https://designreset.com/equation/html/src/assets/img/favicon.ico"/>
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -17,6 +21,8 @@
     <link href="{{ asset('/layouts/semi-dark-menu/css/light/plugins.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layouts/semi-dark-menu/css/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="{{ asset('/src/plugins/src/font-icons/fontawesome/css/regular.css') }}">
     <link rel="stylesheet" href="{{ asset('/src/plugins/src/font-icons/fontawesome/css/fontawesome.css') }}">
@@ -341,13 +347,13 @@
                         </a>
                         <ul class="collapse submenu list-unstyled" id="invoice" data-bs-parent="#accordionExample">
                             <li>
-                                <a href="/produk"> Data Produk </a>
-                            </li>
-                            <li>
                                 <a href="/kategori"> Data Kategori </a>
                             </li>
                             <li>
                                 <a href="/diskon"> Data Diskon </a>
+                            </li>
+                            <li>
+                                <a href="/produk"> Data Produk </a>
                             </li>
                         </ul>
                     </li>
@@ -378,15 +384,6 @@
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><path d="M12 1 L12 23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                                 <span>Penjualan</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="menu">
-                        <a href="/pengiriman" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><path d="M1 3 H16 V16 H1 V3 z"/><path d="M16 8 L20 8 L23 11 L23 16 L16 16 L16 8 Z"/><path d="M8 18.5 A2.5 2.5 0 0 1 5.5 21 A2.5 2.5 0 0 1 3 18.5 A2.5 2.5 0 0 1 8 18.5 z"/><path d="M21 18.5 A2.5 2.5 0 0 1 18.5 21 A2.5 2.5 0 0 1 16 18.5 A2.5 2.5 0 0 1 21 18.5 z"/></svg>
-                                <span>Pengiriman</span>
                             </div>
                         </a>
                     </li>
@@ -1787,12 +1784,16 @@
     <script src="{{ asset('/layouts/semi-dark-menu/app.js') }}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="{{ asset('/src/plugins/src/apex/apexcharts.min.js') }}"></script>
     <script src="{{ asset('/src/assets/js/dashboard/dash_2.js') }}"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 </body>
+
 
 <!-- Mirrored from designreset.com/equation/html/semi-dark-menu/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Feb 2024 03:03:37 GMT -->
 </html>
